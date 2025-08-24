@@ -13,7 +13,7 @@ CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # Configuration
-REPO="zhaopengme/cce"
+REPO="quantumciphermaster/cce"
 BINARY_NAME="cce"
 INSTALL_DIR="$HOME/.local/bin"
 
@@ -168,10 +168,15 @@ show_usage() {
     echo "  cce add <name> <url> <token> - Add a service provider"
     echo "  cce delete <name>            - Delete a service provider"
     echo "  cce use <name>               - Use specified service provider"
+    echo "  cce clear                    - Clear environment variables (switch to official Claude)"
+    echo "  cce install                  - Install shell integration automatically"
     echo "  cce check                    - Check environment variable status"
     echo "  cce --help                   - Show detailed help"
     echo ""
-    print_status "Shell Integration Setup:"
+    print_status "🚀 Quick Setup (Recommended):"
+    echo -e "${GREEN}cce install${NC}"
+    echo ""
+    print_status "Manual Shell Integration Setup:"
     echo -e "${YELLOW}Add this to your shell profile (~/.bashrc, ~/.zshrc, etc.):${NC}"
     echo 'eval "$(cce shellenv)"'
     echo ""
