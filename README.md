@@ -17,12 +17,12 @@
 #### Option 1: One-Click Install (Recommended)
 ```bash
 # Install with curl (supports Linux, macOS Intel & Apple Silicon)
-curl -sSL https://raw.githubusercontent.com/zhaopengme/cce/master/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/quantumciphermaster/cce/master/install.sh | bash
 ```
 
 #### Option 2: Download from Releases
 ```bash
-# Visit https://github.com/zhaopengme/cce/releases
+# Visit https://github.com/quantumciphermaster/cce/releases
 # Download the appropriate binary for your platform:
 # - cce-linux-x86_64.tar.gz (Linux)
 # - cce-macos-x86_64.tar.gz (macOS Intel)
@@ -38,7 +38,7 @@ mv cce ~/.local/bin/  # Make sure ~/.local/bin is in your PATH
 #### Option 3: Build from Source
 ```bash
 # Clone the project
-git clone https://github.com/zhaopengme/cce.git
+git clone https://github.com/quantumciphermaster/cce.git
 cd cce
 
 # Build the project
@@ -51,14 +51,25 @@ cargo install --path .
 #### Option 4: Windows PowerShell
 ```powershell
 # Download and run the PowerShell installer
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/zhaopengme/cce/master/install.ps1" -OutFile "install.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/quantumciphermaster/cce/master/install.ps1" -OutFile "install.ps1"
 .\install.ps1
 ```
 
 ### Setup Shell Integration
 
-The key feature of CCE is the ability to make `cce use` commands take effect immediately in your current terminal. This requires a one-time setup:
+The key feature of CCE is the ability to make `cce use` and `cce clear` commands take effect immediately in your current terminal.
 
+**🚀 Automatic Setup (Recommended):**
+```bash
+cce install
+```
+
+This command will automatically:
+- 🔍 Detect your shell (bash, zsh, fish)
+- ✅ Add shell integration to your configuration file
+- 💡 Provide instructions to activate the integration
+
+**🔧 Manual Setup (Alternative):**
 ```bash
 # Add this line to your shell configuration file (~/.zshrc, ~/.bashrc, etc.)
 eval "$(cce shellenv)"
@@ -107,7 +118,14 @@ cce use anthropic
 eval "$(cce use anthropic --eval)"
 ```
 
-#### 5. Check environment variable status
+#### 5. Clear environment variables (switch back to official Claude client)
+```bash
+cce clear
+```
+
+This will unset `ANTHROPIC_AUTH_TOKEN` and `ANTHROPIC_BASE_URL`, allowing you to use your Claude Pro/Max subscription with the official client.
+
+#### 6. Check environment variable status
 ```bash
 cce check
 ```
@@ -152,6 +170,44 @@ Verify current environment variable status:
 - Display current environment variables
 - Compare CCE configuration with actual environment variables
 - Provide suggestions when there are mismatches
+
+### `cce clear [--eval]`
+Clear environment variables to switch back to using the official Claude client:
+
+**Normal mode** (`cce clear`):
+- 🧹 Display complete clearing information
+- 💡 Provide unset commands for copying
+
+**Eval mode** (`cce clear --eval`):
+- ⚡ Output only unset commands
+- 🔧 Perfect for use with `eval` command
+- 💻 Ideal for scripts and automation
+
+This command will:
+- Unset `ANTHROPIC_AUTH_TOKEN` and `ANTHROPIC_BASE_URL` environment variables
+- Clear the current provider selection in configuration
+- Allow you to use your Claude Pro/Max subscription with the official client
+
+### `cce install [--force]`
+Automatically install shell integration for immediate environment variable effects:
+
+**Normal mode** (`cce install`):
+- 🔍 Detect your current shell (bash, zsh, fish)
+- ✅ Check if integration is already installed
+- 📝 Add integration to appropriate config file
+- 💡 Provide activation instructions
+
+**Force mode** (`cce install --force`):
+- 🔄 Force reinstall even if already present
+- 📝 Add integration regardless of existing setup
+
+This command supports:
+- **Bash**: Adds to `~/.bashrc`
+- **Zsh**: Adds to `~/.zshrc`  
+- **Fish**: Adds to `~/.config/fish/config.fish`
+- **Other shells**: Defaults to `~/.bashrc`
+
+After installation, restart your terminal or run `source ~/.zshrc` (or equivalent) to activate.
 
 ## 🔧 Configuration
 
